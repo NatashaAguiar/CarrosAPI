@@ -94,7 +94,7 @@ public class Usuario {
 	public void setEndereco(String endereco) {
 		this.endereco = endereco;
 	}
-
+	
 	public String getTelefone() {
 		return telefone;
 	}
