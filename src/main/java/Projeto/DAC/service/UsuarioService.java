@@ -14,14 +14,22 @@ public class UsuarioService {
 	
 	
 	private UsuarioRepository usuarioRepository;
+	private EmailService emailService;
 	
 	@Autowired
-	public UsuarioService(UsuarioRepository usuarioRepository) {
+	public UsuarioService(UsuarioRepository usuarioRepository, EmailService emailService) {
         this.usuarioRepository = usuarioRepository;
+        this.emailService = emailService;
     }
 	
 	public Usuario salvar(Usuario usuario) {
-		return usuarioRepository.save(usuario);
+		Usuario usuarioSalvo = usuarioRepository.save(usuario);
+		
+		String assunto = "Cadastro realizado com sucesso!!";
+		String mensagem = String.format("Olá, %s!\n\nSeu cadastro foi realizado com sucesso.\n", usuarioSalvo.getNome());
+		
+		emailService.enviarEmail(usuarioSalvo.getEmail(), assunto, mensagem);
+		return usuarioSalvo;
 	}
 	
 	public List<Usuario> listarTodos(){
