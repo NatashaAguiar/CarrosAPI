@@ -1,42 +1,84 @@
 package Projeto.DAC.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Data
+@NoArgsConstructor
+@Builder
 public class Carro {
-	int Id;
-	String Modelo;
-	String Fabricante;
-	int Ano;
-	double Preco;
 	
-	public int getId() {
-		return Id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer carro_id;
+	
+	@Column(nullable = false, length = 50)
+    @NotEmpty
+    @NotNull
+    private String modelo;
+	
+	@Column(nullable = false, length = 50)
+    @NotEmpty
+    @NotNull
+    private String fabricante;
+
+	@Column(nullable = false)
+    @NotEmpty
+    @NotNull
+    private int ano;
+	
+	@Column(nullable = false)
+    @NotEmpty
+    @NotNull
+    private double preco;
+
+	public Integer getCarro_id() {
+		return carro_id;
 	}
-	public void setId(int id) {
-		Id = id;
+
+	public void setCarro_id(Integer carro_id) {
+		this.carro_id = carro_id;
 	}
+
 	public String getModelo() {
-		return Modelo;
+		return modelo;
 	}
+
 	public void setModelo(String modelo) {
-		Modelo = modelo;
+		this.modelo = modelo;
 	}
+
 	public String getFabricante() {
-		return Fabricante;
+		return fabricante;
 	}
+
 	public void setFabricante(String fabricante) {
-		Fabricante = fabricante;
+		this.fabricante = fabricante;
 	}
+
 	public int getAno() {
-		return Ano;
+		return ano;
 	}
+
 	public void setAno(int ano) {
-		Ano = ano;
+		this.ano = ano;
 	}
+
 	public double getPreco() {
-		return Preco;
+		return preco;
 	}
+
 	public void setPreco(double preco) {
-		Preco = preco;
-	}	
+		this.preco = preco;
+	}
+	
 }
-
-

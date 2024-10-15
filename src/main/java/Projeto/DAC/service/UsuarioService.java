@@ -29,18 +29,14 @@ public class UsuarioService {
     }
 	
 	public Usuario listarPorId(Integer id) {
-		return usuarioRepository.findById(id).orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Contato não encontrado") );
-	}
-	
-	public String listarPorTelefone(Integer id) {
-		return usuarioRepository.findById(id).get().getEmail();            
+		return usuarioRepository.findById(id).orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado") );
 	}
 	
 	public void excluir(Integer id) {
 		usuarioRepository.findById(id).map(usuario -> {
 	        	usuarioRepository.delete(usuario);
 	            return Void.TYPE;
-	        }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Contato não encontrado"));
+	        }).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado"));
 	}
 	
 	public void editar(Integer id, Usuario usuarioAtualizado) {
@@ -54,7 +50,7 @@ public class UsuarioService {
         	usuario.setEmail(usuarioAtualizado.getEmail());
         	usuario.setSenha(usuarioAtualizado.getSenha());
             return usuarioRepository.save(usuario);
-        }).orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Contato não encontrado") );
+        }).orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Usuário não encontrado") );
 	}
 
 }

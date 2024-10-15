@@ -1,7 +1,6 @@
 package Projeto.DAC.controller;
 
 import java.util.List;
-
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,46 +13,46 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import Projeto.DAC.model.Usuario;
-import Projeto.DAC.service.UsuarioService;
+import Projeto.DAC.model.Carro;
+import Projeto.DAC.service.CarroService;
 
 @RestController
 @RequestMapping("/api/usuario")
-public class UsuarioController {
+public class CarroController {
 	
-	private UsuarioService usuarioService;
+	private CarroService carroService;
 	
 	@Autowired
-	public UsuarioController(UsuarioService usuarioService) {
-		this.usuarioService = usuarioService;
+	public CarroController(CarroService carroService) {
+		this.carroService = carroService;
 	}
 	
 	@GetMapping
-	public List<Usuario> listar(){
-		return usuarioService.listarTodos();
+	public List<Carro> listar(){
+		return carroService.listarTodos();
 	}
 	
 	@PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Usuario salvar( @RequestBody @Valid Usuario usuario ){
-        return usuarioService.salvar(usuario);
-    }
-	
+    public Carro salvar( @RequestBody @Valid Carro carro ){
+        return carroService.salvar(carro);
+	}
+
 	@GetMapping("{id}")
-	public Usuario listarPorId(@PathVariable Integer id) {
-		return usuarioService.listarPorId(id);
+	public Carro listarPorId(@PathVariable Integer id) {
+		return carroService.listarPorId(id);
 	}
 	
 	@DeleteMapping("{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void excluir(@PathVariable Integer id) {
-		usuarioService.excluir(id);
+		carroService.excluir(id);
 	}
 	
 	@PutMapping("{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void editar(@PathVariable Integer id, @RequestBody @Valid Usuario usuarioAtualizado) {
-		usuarioService.editar(id, usuarioAtualizado);
+	public void editar(@PathVariable Integer id, @RequestBody @Valid Carro carroAtualizado) {
+		carroService.editar(id, carroAtualizado);
 	}
 	
 }
